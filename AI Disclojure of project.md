@@ -55,4 +55,22 @@ AI usage that is irrelevant to the project (for example, for another class or fo
 - **Prompt:** "I am planning to build a project using Next.JS, something like a "Personal Astronomy Observation Log": A sky-watcher's journal where users log celestial observations (object name, date, location, telescope used, notes, sketch upload). Features a dashboard with charts of observation frequency, favourite object types, and a calendar heatmap. Integrates with the NASA/SIMBAD API to auto-fill object metadata when you type a target name (e.g. "M31"). Shareable public profile pages show your observation history. Suggest a name for it"
 - **Provided code:** No
 
+### 2026-04-14T22:40:42Z — student: Zanged-Jayllow
+
+- **Action:** Documentation and template search.
+- **Prompt:** "I am planning to build a project using Next.JS, something like a "Personal Astronomy Observation Log": A sky-watcher's journal where users log celestial observations (object name, date, location, telescope used, notes, sketch upload). Features a dashboard with charts of observation frequency, favourite object types, and a calendar heatmap. Integrates with the NASA/SIMBAD API to auto-fill object metadata when you type a target name (e.g. "M31"). Shareable public profile pages show your observation history. I have identified that ill likely need the following (besides the initial nextjs setup): supabase, tanstack, Zustand, Recharts/Nivo, NASA Sightings API + Simbad Tap API, React Hook Form + Zod, Tailwind CSS + shadcn/ui. Provide a list of links to relevant documentations and templates, do not provide any code."
+- **Provided code:** No
+
+### 2026-04-14T23:04:20Z — student: Zanged-Jayllow
+
+- **Action:** Request help with specific questions regarding Supabase.
+- **Prompt:** "suppose i used the template project provided by vercel and supabase to setup the first user for my project, can i reuse that user in my actual nextjs application (assuming i used the same project url)? also, since the template already came with the middle-ware (the auth folder) that handles things gracefully, should i test my data structure and data integration with this template first before i make changes to the real deal and potentially breaks things?"
+- **Provided code:** No
+
+### 2026-04-14T23:12:25Z — student: Zanged-Jayllow
+
+- **Action:** Request help with specific questions regarding Supabase and Better Auth.
+- **Prompt:** "if i am already using supabase with my next js, do i still need to install better auth? just that we had a SaaS project with specific backend/api/auth requirements, and some classmates are using better auth while the others chose supabase, so i wanna see the options"
+- **Provided code:** No
+
 ---
