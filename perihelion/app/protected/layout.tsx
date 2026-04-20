@@ -2,45 +2,32 @@ import { EnvVarWarning } from "@/components/env-var-warning";
 import { AuthButton } from "@/components/auth-button";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { hasEnvVars } from "@/lib/utils";
+import { createClient } from "@/lib/supabase/server";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { Suspense } from "react";
 
-export default function ProtectedLayout({
+export default async function ProtectedLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <main
-      className="min-h-screen flex flex-col items-center"
-      style={{
-        background: "radial-gradient(ellipse at 60% 0%, #0d1535 0%, #060912 70%)",
-        fontFamily: "'EB Garamond', Georgia, serif",
-        color: "#e8e4da",
-      }}
-    >
-      {/* ── star-field decoration ─────────────────────────────── */}
-      <div
-        aria-hidden
-        style={{
-          position: "fixed",
-          inset: 0,
-          pointerEvents: "none",
-          backgroundImage:
-            "radial-gradient(1px 1px at 15% 20%, rgba(255,255,255,.55) 0%, transparent 100%)," +
-            "radial-gradient(1px 1px at 42% 65%, rgba(255,255,255,.4) 0%, transparent 100%)," +
-            "radial-gradient(1.5px 1.5px at 75% 10%, rgba(255,255,255,.6) 0%, transparent 100%)," +
-            "radial-gradient(1px 1px at 88% 45%, rgba(255,255,255,.35) 0%, transparent 100%)," +
-            "radial-gradient(1px 1px at 30% 82%, rgba(255,255,255,.45) 0%, transparent 100%)," +
-            "radial-gradient(1px 1px at 55% 38%, rgba(255,255,255,.3) 0%, transparent 100%)",
-          zIndex: 0,
-        }}
-      />
+  if (hasEnvVars) {
+    const supabase = await createClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (!user) {
+      redirect("/auth/login");
+    }
+  }
 
-      <div className="relative z-10 flex-1 w-full flex flex-col gap-20 items-center">
+  return (
+    <main className="min-h-screen flex flex-col items-center">
+      <div className="flex-1 w-full flex flex-col gap-20 items-center">
         <nav className="w-full flex justify-center border-b border-white/10 h-16 backdrop-blur-sm bg-black/20">
           <div className="w-full max-w-5xl flex justify-between items-center p-3 px-5 text-sm">
-            <div className="flex gap-5 items-center">
+            <div className="flex gap-6 items-center flex-wrap">
               <Link
                 href="/"
                 style={{
@@ -54,6 +41,28 @@ export default function ProtectedLayout({
               >
                 ✦ PERIHELION
               </Link>
+              {hasEnvVars && (
+                <>
+                  <Link
+                    href="/protected/dashboard"
+                    style={{ color: "#8ab4ff", textDecoration: "none", fontSize: "0.82rem", letterSpacing: "0.06em" }}
+                  >
+                    Dashboard
+                  </Link>
+                  <Link
+                    href="/protected/log/new"
+                    style={{ color: "#9aaccc", textDecoration: "none", fontSize: "0.82rem", letterSpacing: "0.06em" }}
+                  >
+                    New observation
+                  </Link>
+                  <Link
+                    href="/protected/log"
+                    style={{ color: "#9aaccc", textDecoration: "none", fontSize: "0.82rem", letterSpacing: "0.06em" }}
+                  >
+                    Log
+                  </Link>
+                </>
+              )}
             </div>
             {!hasEnvVars ? (
               <EnvVarWarning />
@@ -65,9 +74,7 @@ export default function ProtectedLayout({
           </div>
         </nav>
 
-        <div className="flex-1 flex flex-col gap-20 max-w-5xl p-5 w-full">
-          {children}
-        </div>
+        <div className="flex-1 flex flex-col gap-20 max-w-5xl p-5 w-full">{children}</div>
 
         <footer
           className="w-full flex items-center justify-center border-t mx-auto text-center text-xs gap-8 py-16"

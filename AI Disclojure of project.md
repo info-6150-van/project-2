@@ -73,4 +73,28 @@ AI usage that is irrelevant to the project (for example, for another class or fo
 - **Prompt:** "if i am already using supabase with my next js, do i still need to install better auth? just that we had a SaaS project with specific backend/api/auth requirements, and some classmates are using better auth while the others chose supabase, so i wanna see the options"
 - **Provided code:** No
 
+### 2026-04-16T12:02:00Z — student: Zanged-Jayllow
+
+- **Action:** Request help with specific questions regarding file structure in prompts.
+- **Prompt:** "when asking question regarding a bigger project, would providing the file system structure help? (ie i list the folders and sub folders the code files are in)?"
+- **Provided code:** No
+
+### 2026-04-17T11:02:00Z — student: Zanged-Jayllow
+
+- **Action:** Request help with specific questions regarding file structure expectations for what i want.
+- **Prompt:** "I have attached my current file structure (using NextJS), if i wanted new pages that become accessible after the user logs in (for example a form submission page, a statistics page, etc), how would my file structure look like afterwards"
+- **Provided code:** No
+
+### 2026-04-18T08:02:00Z — student: Zanged-Jayllow
+
+- **Action:** Request help with specific questions regarding file structure expectations for what i want.
+- **Prompt:** "as seen in the home page, i currently has a few placeholder forms and charts in place. suppose i am using next js with supabase, tanstack, Zustand, Recharts/Nivo, NASA Sightings API + Simbad Tap API, React Hook Form + Zod, Tailwind CSS + shadcn/ui. can i implement these in the auth-protected pages (that i already set up) and roughly how do i approach the process. do not provide the full code, either using text explainations or pseudo code."
+- **Provided code:** No
+
+### 2026-04-19T07:22:00Z — student: Zanged-Jayllow
+
+- **Action:** Analyze what still needs to be done.
+- **Prompt:** (Agent Mode) "Read the file structures and the project description, analyze what is already done and what remains unfinished."
+- **Provided code:** No
+
 ---

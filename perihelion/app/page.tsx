@@ -59,33 +59,8 @@ const HEATMAP_COLORS = ["bg-white/5", "bg-indigo-900/60", "bg-indigo-600/70", "b
 
 export default function Home() {
   return (
-    <main
-      className="min-h-screen flex flex-col items-center"
-      style={{
-        background: "radial-gradient(ellipse at 60% 0%, #0d1535 0%, #060912 70%)",
-        fontFamily: "'EB Garamond', Georgia, serif",
-        color: "#e8e4da",
-      }}
-    >
-      {/* ── star-field decoration ─────────────────────────────── */}
-      <div
-        aria-hidden
-        style={{
-          position: "fixed",
-          inset: 0,
-          pointerEvents: "none",
-          backgroundImage:
-            "radial-gradient(1px 1px at 15% 20%, rgba(255,255,255,.55) 0%, transparent 100%)," +
-            "radial-gradient(1px 1px at 42% 65%, rgba(255,255,255,.4) 0%, transparent 100%)," +
-            "radial-gradient(1.5px 1.5px at 75% 10%, rgba(255,255,255,.6) 0%, transparent 100%)," +
-            "radial-gradient(1px 1px at 88% 45%, rgba(255,255,255,.35) 0%, transparent 100%)," +
-            "radial-gradient(1px 1px at 30% 82%, rgba(255,255,255,.45) 0%, transparent 100%)," +
-            "radial-gradient(1px 1px at 55% 38%, rgba(255,255,255,.3) 0%, transparent 100%)",
-          zIndex: 0,
-        }}
-      />
-
-      <div className="relative z-10 flex-1 w-full flex flex-col gap-20 items-center">
+    <main className="min-h-screen flex flex-col items-center">
+      <div className="flex-1 w-full flex flex-col gap-20 items-center">
         {/* ── NAV ──────────────────────────────────────────────── */}
         <nav className="w-full flex justify-center border-b border-white/10 h-16 backdrop-blur-sm bg-black/20">
           <div className="w-full max-w-5xl flex justify-between items-center p-3 px-5 text-sm">
@@ -163,7 +138,7 @@ export default function Home() {
           </p>
           <div className="flex gap-3 flex-wrap">
             <Link
-              href="/log/new"
+              href="/protected/log/new"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -181,7 +156,7 @@ export default function Home() {
               + New Observation
             </Link>
             <Link
-              href="/dashboard"
+              href="/protected/dashboard"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -501,7 +476,7 @@ export default function Home() {
               Recent Observations
             </h2>
             <Link
-              href="/log"
+              href="/protected/log"
               style={{ fontSize: "0.78rem", color: "#4a7acc", textDecoration: "none", letterSpacing: "0.06em" }}
             >
               All entries →
@@ -586,7 +561,7 @@ export default function Home() {
               — your full observation log, stats, and sketches, beautifully presented.
             </p>
             <Link
-              href="/sign-up"
+              href="/auth/sign-up"
               style={{
                 display: "inline-flex",
                 alignItems: "center",

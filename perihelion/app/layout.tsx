@@ -33,7 +33,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <div className="cosmic-shell">
+            <div aria-hidden className="cosmic-stars" />
+            <div className="cosmic-content">{children}</div>
+          </div>
         </ThemeProvider>
       </body>
     </html>

@@ -4,6 +4,8 @@
 
 ## Introduction
 
+Perihelion is a sky-watcher's journal service where users log celestial observations (object name, date, location, telescope used, notes, sketch upload). Features a dashboard with charts of observation frequency, favourite object types, and a calendar heatmap. Integrates with the NASA/SIMBAD API to auto-fill object metadata when you type a target name (e.g. "M31"). Shareable public profile pages show your observation history.
+
 ## Implementation Overview 
 
 1. Component Design
