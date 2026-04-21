@@ -29,3 +29,14 @@ export function parseObservationForm(formData: FormData) {
     notes: raw.notes ?? "",
   });
 }
+
+const observationIdSchema = z.string().uuid({ message: "Invalid observation id" });
+
+export function parseObservationId(formData: FormData) {
+  const raw = formData.get("observation_id");
+  return observationIdSchema.safeParse(typeof raw === "string" ? raw : "");
+}
+
+export function parseObservationIdParam(raw: string) {
+  return observationIdSchema.safeParse(raw);
+}

@@ -1,3 +1,4 @@
+import { ObservationDeleteButton } from "@/components/observation-delete-button";
 import { createClient } from "@/lib/supabase/server";
 import type { ObservationRow } from "@/lib/types/observation";
 import Link from "next/link";
@@ -118,7 +119,15 @@ export default async function ObservationLogPage() {
                   </a>
                 )}
               </div>
-              <div style={{ textAlign: "right" }}>
+              <div
+                style={{
+                  textAlign: "right",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-end",
+                  gap: "0.5rem",
+                }}
+              >
                 <span
                   style={{
                     fontSize: "0.65rem",
@@ -128,12 +137,28 @@ export default async function ObservationLogPage() {
                     padding: "0.15rem 0.5rem",
                     borderRadius: "2px",
                     display: "inline-block",
-                    marginBottom: "0.4rem",
                   }}
                 >
                   {(obs.object_type || "UNKNOWN").toUpperCase()}
                 </span>
                 <p style={{ margin: 0, fontSize: "0.75rem", color: "#4a6088" }}>{obs.observed_at}</p>
+                <div className="flex flex-wrap items-center justify-end gap-2">
+                  <Link
+                    href={`/protected/log/${obs.id}/edit`}
+                    style={{
+                      fontSize: "0.75rem",
+                      letterSpacing: "0.06em",
+                      color: "#8ab4ff",
+                      textDecoration: "none",
+                      border: "1px solid rgba(140,180,255,0.25)",
+                      padding: "0.35rem 0.75rem",
+                      borderRadius: "2px",
+                    }}
+                  >
+                    Edit
+                  </Link>
+                  <ObservationDeleteButton observationId={obs.id} />
+                </div>
               </div>
             </div>
           );

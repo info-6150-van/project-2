@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 
+// SIMBAD TAP Query //
+
 const SIMBAD_TAP = "https://simbad.u-strasbg.fr/simbad/sim-tap/sync";
 
 function escapeAdqlLiteral(s: string): string {
@@ -14,7 +16,7 @@ export async function GET(request: Request) {
   }
 
   const ident = escapeAdqlLiteral(q);
-  const adql = `SELECT TOP 1 b.main_id, b.otype, b.ra, b.dec
+  const adql = `SELECT TOP 1 b.main_id, b.otype_txt, b.ra, b.dec
     FROM basic b
     WHERE b.oid IN (SELECT oidref FROM ident WHERE id = '${ident}')`;
 
@@ -44,7 +46,7 @@ export async function GET(request: Request) {
 
     const data = (await res.json()) as {
       data?: unknown[][];
-      metadata?: { name?: string[] };
+      metadata?: Array<{ name?: string }>;
     };
 
     const rows = data.data;
@@ -52,15 +54,21 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: "not found" }, { status: 404 });
     }
 
-    const names = (data.metadata?.name ?? ["main_id", "otype", "ra", "dec"]).map((n) =>
-      String(n).toLowerCase(),
+    const names = (data.metadata ?? []).map((col) =>
+      String(col.name ?? "").toLowerCase(),
     );
-    const idx = (n: string) => names.indexOf(n.toLowerCase());
+
+    const effectiveNames =
+      names.length > 0 ? names : ["main_id", "otype_txt", "ra", "dec"];
+
+    const idx = (n: string) => effectiveNames.indexOf(n.toLowerCase());
     const row = rows[0]!;
+
     const iMain = idx("main_id");
-    const iType = idx("otype");
+    const iType = idx("otype_txt");
     const iRa = idx("ra");
     const iDec = idx("dec");
+
     const mainId = String(iMain >= 0 ? row[iMain]! : row[0] ?? "");
     const otype = String(iType >= 0 ? row[iType]! : row[1] ?? "");
     const ra = iRa >= 0 ? row[iRa] : row[2];

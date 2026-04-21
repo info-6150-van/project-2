@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-/** JPL Small-Body Database — meaningful for asteroids, comets, dwarf planets, major planets by name. */
+// JPL Small-Body Database — meaningful for asteroids, comets, dwarf planets, major planets by name. //
 const SBDB = "https://ssd-api.jpl.nasa.gov/sbdb.api";
 
 export type NasaSightingsResponse =
@@ -32,20 +32,40 @@ export async function GET(request: Request) {
     });
     clearTimeout(timer);
 
+    if (!res.ok) {
+      return NextResponse.json({
+        applicable: false,
+        reason: "not_a_small_body_or_unknown",
+      } satisfies NasaSightingsResponse);
+    }
+
     const json = (await res.json()) as {
       object?: {
         designation?: string;
         name?: string;
         kind?: string;
-        orbit_class?: string;
+        orbit_class?: { name?: string };
       };
+      count?: number;
+      list?: Array<{ designation: string; name?: string; kind?: string }>;
       message?: string;
     };
 
-    if (!res.ok || json.message) {
+    if (json.message) {
       return NextResponse.json({
         applicable: false,
-        reason: "not_a_small_body_or_unknown",
+        reason: "api_error",
+      } satisfies NasaSightingsResponse);
+    }
+
+    if (json.count && json.list && json.list.length > 0) {
+      const first = json.list[0];
+      return NextResponse.json({
+        applicable: true,
+        designation: first.designation,
+        name: first.name,
+        kind: first.kind,
+        note: `NASA JPL SBDB — matched ${json.count} record(s); showing first result`,
       } satisfies NasaSightingsResponse);
     }
 
@@ -62,7 +82,7 @@ export async function GET(request: Request) {
       designation: obj.designation,
       name: obj.name,
       kind: obj.kind,
-      orbitClass: obj.orbit_class,
+      orbitClass: obj.orbit_class?.name,
       note: "NASA JPL SBDB — solar-system small-body record",
     } satisfies NasaSightingsResponse);
   } catch (e) {

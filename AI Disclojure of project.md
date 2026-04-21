@@ -97,4 +97,16 @@ AI usage that is irrelevant to the project (for example, for another class or fo
 - **Prompt:** (Agent Mode) "Read the file structures and the project description, analyze what is already done and what remains unfinished."
 - **Provided code:** No
 
+### 2026-04-20T05:54:01Z — student: Zanged-Jayllow
+
+- **Action:** Debugging.
+- **Prompt:** (Agent Mode) "My SIMBAD and Nasa API isn't working as intended, what might be the reason? Do not provide the actual fixes."
+- **Provided code:** No
+
+### 2026-04-21T09:54:01Z — student: Zanged-Jayllow
+
+- **Action:** Analyze what still needs to be done.
+- **Prompt:** (Agent Mode) "based on PROJECT.md and requirements.md, what else is still missing from the project? provide the prioritized “finish list” (smallest effort first)"
+- **Provided code:** No
+
 ---

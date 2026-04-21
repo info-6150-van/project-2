@@ -1,7 +1,7 @@
 "use client";
 
 import { observationFormSchema, type ObservationFormValues } from "@/lib/observations/schema";
-import { createObservation } from "@/app/protected/log/new/actions";
+import { createObservation, updateObservation } from "@/app/protected/log/actions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -29,7 +29,24 @@ type NasaJson =
   | { applicable: true; designation: string; name?: string; kind?: string; orbitClass?: string; note?: string }
   | { applicable: false; reason: string };
 
-export function ObservationForm() {
+function toDateInputValue(raw: string): string {
+  if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) return raw;
+  return raw.slice(0, 10);
+}
+
+export type ObservationFormProps = {
+  mode?: "create" | "edit";
+  observationId?: string;
+  initialValues?: Partial<ObservationFormValues>;
+  existingSketchUrl?: string | null;
+};
+
+export function ObservationForm({
+  mode = "create",
+  observationId,
+  initialValues,
+  existingSketchUrl = null,
+}: ObservationFormProps) {
   const router = useRouter();
   const fileRef = useRef<HTMLInputElement>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -47,12 +64,15 @@ export function ObservationForm() {
   } = useForm<ObservationFormValues>({
     resolver: zodResolver(observationFormSchema),
     defaultValues: {
-      object_name: "",
-      object_type: "",
-      observed_at: new Date().toISOString().slice(0, 10),
-      location: "",
-      telescope: "",
-      notes: "",
+      object_name: initialValues?.object_name ?? "",
+      object_type: initialValues?.object_type ?? "",
+      observed_at:
+        initialValues?.observed_at != null && initialValues.observed_at !== ""
+          ? toDateInputValue(initialValues.observed_at)
+          : new Date().toISOString().slice(0, 10),
+      location: initialValues?.location ?? "",
+      telescope: initialValues?.telescope ?? "",
+      notes: initialValues?.notes ?? "",
     },
   });
 
@@ -117,7 +137,13 @@ export function ObservationForm() {
     if (file && file.size > 0) {
       fd.set("sketch", file);
     }
-    const result = await createObservation(fd);
+    let result;
+    if (mode === "edit" && observationId) {
+      fd.set("observation_id", observationId);
+      result = await updateObservation(fd);
+    } else {
+      result = await createObservation(fd);
+    }
     setSubmitting(false);
     if (!result.ok) {
       setFormError(result.error);
@@ -237,6 +263,19 @@ export function ObservationForm() {
 
         <div className="flex flex-col gap-1" style={{ gridColumn: "1 / -1" }}>
           <label style={labelStyle}>SKETCH (optional)</label>
+          {mode === "edit" && existingSketchUrl && (
+            <p style={{ margin: "0 0 0.35rem", fontSize: "0.82rem" }}>
+              <a
+                href={existingSketchUrl}
+                target="_blank"
+                rel="noreferrer"
+                style={{ color: "#4a7acc" }}
+              >
+                Current sketch
+              </a>
+              <span style={{ color: "#6a88bb", marginLeft: "0.5rem" }}>— upload a file below to replace</span>
+            </p>
+          )}
           <input ref={fileRef} type="file" accept="image/*" style={{ fontSize: "0.85rem", color: "#9aaccc" }} />
         </div>
       </div>
@@ -261,7 +300,7 @@ export function ObservationForm() {
           width: "fit-content",
         }}
       >
-        {submitting ? "Saving…" : "Save observation"}
+        {submitting ? "Saving…" : mode === "edit" ? "Save changes" : "Save observation"}
       </button>
     </form>
   );
