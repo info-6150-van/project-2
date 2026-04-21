@@ -15,6 +15,10 @@ To be consistent with the logging policy, the github user name will be provided 
 
 AI usage that is irrelevant to the project (for example, for another class or for a standalone personal project) won't be logged in the document.
 
+## Note 3
+
+I used online tools for converting local time to ISO 8601 time code. I later noticed that different tools have inconsistent results, and often when i log a AI usage a few days afterward the actual interactions, the time code is often off (since I can recall the exact hours at most). Treat the time code as rough time stamps.
+
 ---
 
 ## Entries
@@ -108,5 +112,17 @@ AI usage that is irrelevant to the project (for example, for another class or fo
 - **Action:** Analyze what still needs to be done.
 - **Prompt:** (Agent Mode) "based on PROJECT.md and requirements.md, what else is still missing from the project? provide the prioritized “finish list” (smallest effort first)"
 - **Provided code:** No
+
+### 2026-04-21T17:56:23Z — student: Zanged-Jayllow
+
+- **Action:** Debugging broken log in session.
+- **Prompt:** (Agent Mode) "I cannot proceed once i fill in the email, password, and click the log in button inside the log in page. provide code snippets from the original code that is responsible for this issue and suggest fixes. DO NOT provide the actual fixed code."
+- **Provided code:** Yes. The provided code is the code snippets taken from the original code highlighted for causing the issue being debugged. 
+
+### 2026-04-21T18:11:15Z — student: Zanged-Jayllow
+
+- **Action:** Debugging broken theme switcher.
+- **Prompt:** (Agent Mode) "The theme switcher from next-themes is no longer functioning. provide code snippets from the original code that is responsible for this issue and suggest fixes. DO NOT provide the actual fixed code."
+- **Provided code:** Yes. The provided code is the code snippets taken from the original code highlighted for causing the issue being debugged. 
 
 ---
