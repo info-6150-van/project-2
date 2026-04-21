@@ -28,4 +28,6 @@ Perihelion is a sky-watcher's journal service where users log celestial observat
 
 ## AI Use Disclosure
 
-For AI Usage Disclosures, see [The Disclosure Log](./AI%20Disclojure%20of%20project.md) and the [Additional Usage Log](./00_AI_RESPONSE_LOG.md). The files are separate as per the [requirement](./LLM_INSTRUCTIONS.md).
+I consulted the help of AI tools such as Claude (Claude.ai and Claude Code) and Cursor (Composer 1.5 and Composer 2) for this project, in providing idea suggestions, tech stack analysis, online resource search, debugging, and code snippet generation.
+
+For detailed AI Usage Disclosures, see [The Disclosure Log](./AI%20Disclojure%20of%20project.md) and the [Additional Usage Log](./00_AI_RESPONSE_LOG.md). The files are separate as per the [requirement](./LLM_INSTRUCTIONS_NEW.md).

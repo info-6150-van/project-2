@@ -123,6 +123,12 @@ export function ObservationForm({
     setValue("object_type", simbadHint.objectType);
   };
 
+  const applyNasa = () => {
+    if (!nasaHint || !("applicable" in nasaHint) || !nasaHint.applicable) return;
+    if (nasaHint.name) setValue("object_name", nasaHint.name);
+    if (nasaHint.kind) setValue("object_type", nasaHint.kind);
+  };
+
   const onSubmit = async (data: ObservationFormValues) => {
     setSubmitting(true);
     setFormError(null);
@@ -200,29 +206,50 @@ export function ObservationForm({
               )}
               {nasaHint && "applicable" in nasaHint && nasaHint.applicable && (
                 <p style={{ margin: simbadHint ? "0 0 0.35rem" : 0 }}>
-                  <strong style={{ color: "#dce8ff" }}>NASA (SBDB):</strong>{" "}
+                  <strong style={{ color: "#dce8ff" }}>NASA:</strong>{" "}
                   {[nasaHint.designation, nasaHint.name].filter(Boolean).join(" · ")}
                   {nasaHint.orbitClass ? ` — ${nasaHint.orbitClass}` : ""}
                 </p>
               )}
-              {simbadHint && (
-                <button
-                  type="button"
-                  onClick={applySimbad}
-                  style={{
-                    marginTop: "0.5rem",
-                    padding: "0.35rem 0.75rem",
-                    fontSize: "0.75rem",
-                    letterSpacing: "0.06em",
-                    background: "rgba(74,122,204,0.25)",
-                    border: "1px solid rgba(74,122,204,0.4)",
-                    borderRadius: "2px",
-                    color: "#8ab4ff",
-                    cursor: "pointer",
-                  }}
-                >
-                  Apply SIMBAD name and type
-                </button>
+              {(simbadHint || (nasaHint && "applicable" in nasaHint && nasaHint.applicable)) && (
+                <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", marginTop: "0.5rem" }}>
+                  {simbadHint && (
+                    <button
+                      type="button"
+                      onClick={applySimbad}
+                      style={{
+                        padding: "0.35rem 0.75rem",
+                        fontSize: "0.75rem",
+                        letterSpacing: "0.06em",
+                        background: "rgba(74,122,204,0.25)",
+                        border: "1px solid rgba(74,122,204,0.4)",
+                        borderRadius: "2px",
+                        color: "#8ab4ff",
+                        cursor: "pointer",
+                      }}
+                    >
+                      Apply SIMBAD name and type
+                    </button>
+                  )}
+                  {nasaHint && "applicable" in nasaHint && nasaHint.applicable && (
+                    <button
+                      type="button"
+                      onClick={applyNasa}
+                      style={{
+                        padding: "0.35rem 0.75rem",
+                        fontSize: "0.75rem",
+                        letterSpacing: "0.06em",
+                        background: "rgba(74,122,204,0.25)",
+                        border: "1px solid rgba(74,122,204,0.4)",
+                        borderRadius: "2px",
+                        color: "#8ab4ff",
+                        cursor: "pointer",
+                      }}
+                    >
+                      Apply NASA name and type
+                    </button>
+                  )}
+                </div>
               )}
             </div>
           )}

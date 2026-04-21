@@ -123,6 +123,18 @@ I used online tools for converting local time to ISO 8601 time code. I later not
 
 - **Action:** Debugging broken theme switcher.
 - **Prompt:** (Agent Mode) "The theme switcher from next-themes is no longer functioning. provide code snippets from the original code that is responsible for this issue and suggest fixes. DO NOT provide the actual fixed code."
-- **Provided code:** Yes. The provided code is the code snippets taken from the original code highlighted for causing the issue being debugged. 
+- **Provided code:** Yes. The provided code is the code snippets taken from the original code highlighted for causing the issue being debugged.
+
+### 2026-04-21T21:12:21Z — student: Zanged-Jayllow
+
+- **Action:** Debugging broken API calls.
+- **Prompt:** (Agent Mode) "the nasa api inside perihelion\app\api\nasa-sightings does not appear to be doing anything at the moment. what is the issue?."
+- **Provided code:** Yes. The provided code a code snippet for implementing another NASA API that potentially solves the issue. 
+
+### 2026-04-21T21:39:21Z — student: Zanged-Jayllow
+
+- **Action:** Debugging broken API calls.
+- **Prompt:** (Agent Mode) "it still appears to be not doing anything in the UI layer. for example typing in "mars" does nothing (besides the SIMBAD giving an error because SIMBAD does not cover solar system objects)"
+- **Provided code:** Yes. The provided code a code snippet that explains why the previous approach did not work and potential workarounds, such as a hard coded lookup table that returns without any API call. 
 
 ---
