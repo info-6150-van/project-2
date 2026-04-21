@@ -128,7 +128,7 @@ export function DashboardView({
                     color: "#dce8ff",
                     fontSize: 12,
                   }}
-                  formatter={(value: number, name: string) => [value, name]}
+                  formatter={(value, name) => [value ?? 0, name]}
                 />
               </PieChart>
             </ResponsiveContainer>

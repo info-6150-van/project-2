@@ -2,11 +2,11 @@ import { z } from "zod";
 
 export const observationFormSchema = z.object({
   object_name: z.string().min(1, "Target object is required").max(500),
-  object_type: z.string().max(200).optional().default(""),
+  object_type: z.string().max(200),
   observed_at: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Use a valid date"),
-  location: z.string().max(500).optional().default(""),
-  telescope: z.string().max(500).optional().default(""),
-  notes: z.string().max(8000).optional().default(""),
+  location: z.string().max(500),
+  telescope: z.string().max(500),
+  notes: z.string().max(8000),
 });
 
 export type ObservationFormValues = z.infer<typeof observationFormSchema>;
