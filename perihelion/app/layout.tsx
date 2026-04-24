@@ -36,7 +36,6 @@ export default function RootLayout({
         >
           <Providers>
             <div className="cosmic-shell">
-              <div aria-hidden className="cosmic-stars" />
               <div className="cosmic-content">{children}</div>
             </div>
           </Providers>

@@ -45,7 +45,7 @@ export function ObservationLogContent() {
               fontFamily: "'EB Garamond', Georgia, serif",
               fontSize: "1.35rem",
               letterSpacing: "0.12em",
-              color: "#8ab4ff",
+              color: "var(--app-section-title)",
               textTransform: "uppercase",
               fontWeight: 400,
               margin: 0,
@@ -53,7 +53,7 @@ export function ObservationLogContent() {
           >
             Observation log
           </h1>
-          <p style={{ margin: "0.35rem 0 0", color: "#9aaccc", fontSize: "0.9rem" }}>
+          <p style={{ margin: "0.35rem 0 0", color: "var(--app-body)", fontSize: "0.9rem" }}>
             {isLoading ? "Loading…" : `${rows.length} ${rows.length !== (data?.length ?? 0) ? `of ${data?.length ?? 0} ` : ""}entries`}
           </p>
         </div>
@@ -63,10 +63,10 @@ export function ObservationLogContent() {
             display: "inline-flex",
             alignItems: "center",
             padding: "0.6rem 1.4rem",
-            background: "linear-gradient(135deg, #2a4cad 0%, #1a2e6e 100%)",
-            border: "1px solid rgba(140,180,255,0.3)",
+            background: "var(--app-btn-primary)",
+            border: "1px solid var(--app-btn-primary-border)",
             borderRadius: "2px",
-            color: "#dce8ff",
+            color: "var(--app-btn-primary-text)",
             textDecoration: "none",
             fontSize: "0.88rem",
             letterSpacing: "0.06em",
@@ -85,10 +85,10 @@ export function ObservationLogContent() {
           value={logFilters.search}
           onChange={(e) => setLogSearch(e.target.value)}
           style={{
-            background: "rgba(10,15,35,0.6)",
-            border: "1px solid rgba(140,180,255,0.2)",
+            background: "var(--app-input-bg)",
+            border: "1px solid var(--app-input-border)",
             borderRadius: "2px",
-            color: "#dce8ff",
+            color: "var(--app-input-color)",
             padding: "0.45rem 0.75rem",
             fontSize: "0.85rem",
             outline: "none",
@@ -99,10 +99,10 @@ export function ObservationLogContent() {
           value={logFilters.typeFilter}
           onChange={(e) => setLogTypeFilter(e.target.value)}
           style={{
-            background: "rgba(10,15,35,0.6)",
-            border: "1px solid rgba(140,180,255,0.2)",
+            background: "var(--app-input-bg)",
+            border: "1px solid var(--app-input-border)",
             borderRadius: "2px",
-            color: logFilters.typeFilter ? "#dce8ff" : "#6a88bb",
+            color: logFilters.typeFilter ? "var(--app-input-color)" : "var(--app-label)",
             padding: "0.45rem 0.75rem",
             fontSize: "0.85rem",
             outline: "none",
@@ -120,9 +120,9 @@ export function ObservationLogContent() {
             onClick={resetLogFilters}
             style={{
               background: "none",
-              border: "1px solid rgba(140,180,255,0.2)",
+              border: "1px solid var(--app-input-border)",
               borderRadius: "2px",
-              color: "#6a88bb",
+              color: "var(--app-label)",
               padding: "0.45rem 0.75rem",
               fontSize: "0.82rem",
               cursor: "pointer",
@@ -135,21 +135,21 @@ export function ObservationLogContent() {
 
       <div className="flex flex-col gap-3">
         {isLoading && (
-          <p style={{ color: "#6a88bb", fontSize: "0.92rem" }}>Loading…</p>
+          <p style={{ color: "var(--app-label)", fontSize: "0.92rem" }}>Loading…</p>
         )}
         {error && (
-          <p style={{ color: "#f87171", fontSize: "0.92rem" }}>
+          <p style={{ color: "var(--destructive)", fontSize: "0.92rem" }}>
             Could not load observations. Run the Supabase migration if the table is missing.
           </p>
         )}
         {!isLoading && !error && rows.length === 0 && (
-          <p style={{ color: "#6a88bb", fontSize: "0.92rem" }}>
+          <p style={{ color: "var(--app-label)", fontSize: "0.92rem" }}>
             {logFilters.search || logFilters.typeFilter ? (
               "No observations match your filters."
             ) : (
               <>
                 No observations yet.{" "}
-                <Link href="/protected/log/new" style={{ color: "#4a7acc" }}>
+                <Link href="/protected/log/new" style={{ color: "var(--app-link)" }}>
                   Log your first
                 </Link>
                 .
@@ -166,10 +166,10 @@ export function ObservationLogContent() {
             <div
               key={obs.id}
               style={{
-                border: "1px solid rgba(140,180,255,0.12)",
+                border: "1px solid var(--app-card-border)",
                 borderRadius: "3px",
                 padding: "1rem 1.25rem",
-                background: "rgba(10,15,35,0.5)",
+                background: "var(--app-card-bg)",
                 display: "grid",
                 gridTemplateColumns: "1fr auto",
                 gap: "0.25rem 1rem",
@@ -177,11 +177,11 @@ export function ObservationLogContent() {
               }}
             >
               <div>
-                <p style={{ margin: 0, fontSize: "1rem", color: "#dce8ff" }}>{obs.object_name}</p>
-                <p style={{ margin: "0.25rem 0 0", fontSize: "0.82rem", color: "#6a88bb" }}>
+                <p style={{ margin: 0, fontSize: "1rem", color: "var(--app-heading)" }}>{obs.object_name}</p>
+                <p style={{ margin: "0.25rem 0 0", fontSize: "0.82rem", color: "var(--app-label)" }}>
                   {obs.telescope || "—"} · {obs.location || "—"}
                 </p>
-                <p style={{ margin: "0.4rem 0 0", fontSize: "0.85rem", color: "#9aaccc", lineHeight: 1.5 }}>
+                <p style={{ margin: "0.4rem 0 0", fontSize: "0.85rem", color: "var(--app-body)", lineHeight: 1.5 }}>
                   {obs.notes || "—"}
                 </p>
                 {sketchUrl && (
@@ -189,7 +189,7 @@ export function ObservationLogContent() {
                     href={sketchUrl}
                     target="_blank"
                     rel="noreferrer"
-                    style={{ fontSize: "0.78rem", color: "#4a7acc", marginTop: "0.35rem", display: "inline-block" }}
+                    style={{ fontSize: "0.78rem", color: "var(--app-link)", marginTop: "0.35rem", display: "inline-block" }}
                   >
                     View sketch
                   </a>
@@ -208,8 +208,8 @@ export function ObservationLogContent() {
                   style={{
                     fontSize: "0.65rem",
                     letterSpacing: "0.1em",
-                    color: "#4a7acc",
-                    border: "1px solid rgba(74,122,204,0.25)",
+                    color: "var(--app-tag)",
+                    border: "1px solid var(--app-tag-border)",
                     padding: "0.15rem 0.5rem",
                     borderRadius: "2px",
                     display: "inline-block",
@@ -217,16 +217,16 @@ export function ObservationLogContent() {
                 >
                   {(obs.object_type || "UNKNOWN").toUpperCase()}
                 </span>
-                <p style={{ margin: 0, fontSize: "0.75rem", color: "#4a6088" }}>{obs.observed_at}</p>
+                <p style={{ margin: 0, fontSize: "0.75rem", color: "var(--app-dim)" }}>{obs.observed_at}</p>
                 <div className="flex flex-wrap items-center justify-end gap-2">
                   <Link
                     href={`/protected/log/${obs.id}/edit`}
                     style={{
                       fontSize: "0.75rem",
                       letterSpacing: "0.06em",
-                      color: "#8ab4ff",
+                      color: "var(--app-section-title)",
                       textDecoration: "none",
-                      border: "1px solid rgba(140,180,255,0.25)",
+                      border: "1px solid var(--app-btn-outline-border)",
                       padding: "0.35rem 0.75rem",
                       borderRadius: "2px",
                     }}

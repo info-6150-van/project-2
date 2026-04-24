@@ -132,12 +132,6 @@
   --app-code: #2a4cad;
   --app-sketch-border: rgba(42, 76, 173, 0.2);
   --app-sketch-text: #8090b8;
-  --star-1: rgba(42, 76, 173, 0.1);
-  --star-2: rgba(42, 76, 173, 0.08);
-  --star-3: rgba(42, 76, 173, 0.12);
-  --star-4: rgba(42, 76, 173, 0.07);
-  --star-5: rgba(42, 76, 173, 0.1);
-  --star-6: rgba(42, 76, 173, 0.06);
 }
 
 .dark {
@@ -223,12 +217,6 @@
   --app-code: #8ab4ff;
   --app-sketch-border: rgba(140, 180, 255, 0.2);
   --app-sketch-text: #4a6088;
-  --star-1: rgba(255, 255, 255, 0.55);
-  --star-2: rgba(255, 255, 255, 0.4);
-  --star-3: rgba(255, 255, 255, 0.6);
-  --star-4: rgba(255, 255, 255, 0.35);
-  --star-5: rgba(255, 255, 255, 0.45);
-  --star-6: rgba(255, 255, 255, 0.3);
 }
 
 @layer base {
@@ -251,20 +239,6 @@
     background: var(--app-bg-gradient);
     font-family: "EB Garamond", Georgia, serif;
     color: var(--app-heading);
-  }
-
-  .cosmic-stars {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    background-image:
-      radial-gradient(1px 1px at 15% 20%, var(--star-1) 0%, transparent 100%),
-      radial-gradient(1px 1px at 42% 65%, var(--star-2) 0%, transparent 100%),
-      radial-gradient(1.5px 1.5px at 75% 10%, var(--star-3) 0%, transparent 100%),
-      radial-gradient(1px 1px at 88% 45%, var(--star-4) 0%, transparent 100%),
-      radial-gradient(1px 1px at 30% 82%, var(--star-5) 0%, transparent 100%),
-      radial-gradient(1px 1px at 55% 38%, var(--star-6) 0%, transparent 100%);
   }
 
   .cosmic-content {

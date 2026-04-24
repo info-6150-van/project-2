@@ -141,6 +141,24 @@ I used online tools for converting local time to ISO 8601 time code. I later not
 
 - **Action:** Analyze what still needs to be done, estimate the difficulty of implementing role based features, provided relevant code snippets.
 - **Prompt:** (Agent Mode) "read requirement.md, besides the documentation work, is the project meeting the criteria? For role-based features, which one is more technically feasible and do i need to significantly alter the SQL structure of my existing tables?"
-- **Provided code:** Yes. The provided code a code snippet that (1) highlights existing code that needed to be changed (2) SQL commands that i need to run on Supabase (3) Examples of code that enables role-based access. 
+- **Provided code:** Yes. The provided code a code snippet that (1) highlights existing code that needed to be changed (2) SQL commands that i need to run on Supabase (3) Examples of code that enables role-based access.
+
+### 2026-04-23T22:58:39Z — student: Zanged-Jayllow
+
+- **Action:** Debugging SQL structures and log in issues.
+- **Prompt:** (Agent Mode) "observations cannot be loaded upon logging in. I just ran the migration SQL number 003 in perihelion/supabase/migrations/"
+- **Provided code:** Yes. The provided code a code snippet that contains SQL commands that i need to run on Supabase.
+
+### 2026-04-23T23:01:55Z — student: Zanged-Jayllow
+
+- **Action:** Debugging CSS and UI issues.
+- **Prompt:** (Agent Mode) "i keep running into the following warning: [browser] The width(-1) and height(-1) of chart should be greater than 0, please check the style of container, or the props width(100%) and height(100%), or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the height and width. Identify the cause. Do not provide any code."
+- **Provided code:** No. 
+
+### 2026-04-23T23:24:27Z — student: Zanged-Jayllow
+
+- **Action:** Debugging CSS and UI issues (the previous one did not work).
+- **Prompt:** (Agent Mode) "i keep running into the following warning: [browser] The width(-1) and height(-1) of chart should be greater than 0, please check the style of container, or the props width(100%) and height(100%), or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the height and width. Identify the cause. Do not provide any code."
+- **Provided code:** Yes. The provided code is a 2-line snippet that contains the UI fix with NextJS SSR-specific DOM considerations.
 
 ---

@@ -8,11 +8,11 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 
 const inputStyle: React.CSSProperties = {
-  background: "rgba(255,255,255,0.04)",
-  border: "1px solid rgba(140,180,255,0.2)",
+  background: "var(--app-input-bg)",
+  border: "1px solid var(--app-input-border)",
   borderRadius: "2px",
   padding: "0.5rem 0.75rem",
-  color: "#dce8ff",
+  color: "var(--app-input-color)",
   fontSize: "0.95rem",
   fontFamily: "inherit",
   width: "100%",
@@ -21,7 +21,7 @@ const inputStyle: React.CSSProperties = {
 const labelStyle: React.CSSProperties = {
   fontSize: "0.72rem",
   letterSpacing: "0.16em",
-  color: "#6a88bb",
+  color: "var(--app-label)",
 };
 
 type SimbadJson = { canonicalName: string; objectType: string; ra?: number; dec?: number };
@@ -170,8 +170,8 @@ export function ObservationForm({
               style={{
                 fontSize: "0.65rem",
                 letterSpacing: "0.1em",
-                color: "#4a8aff",
-                border: "1px solid rgba(74,138,255,0.3)",
+                color: "var(--app-api-tag)",
+                border: "1px solid var(--app-api-tag-border)",
                 padding: "0.2rem 0.5rem",
                 borderRadius: "2px",
                 whiteSpace: "nowrap",
@@ -180,11 +180,11 @@ export function ObservationForm({
               NASA · SIMBAD
             </span>
             {lookupLoading && (
-              <span style={{ fontSize: "0.75rem", color: "#6a88bb" }}>Looking up…</span>
+              <span style={{ fontSize: "0.75rem", color: "var(--app-label)" }}>Looking up…</span>
             )}
           </div>
           {errors.object_name && (
-            <p style={{ fontSize: "0.78rem", color: "#f87171", margin: 0 }}>{errors.object_name.message}</p>
+            <p style={{ fontSize: "0.78rem", color: "var(--destructive)", margin: 0 }}>{errors.object_name.message}</p>
           )}
 
           {(simbadHint || (nasaHint && "applicable" in nasaHint && nasaHint.applicable)) && (
@@ -192,21 +192,21 @@ export function ObservationForm({
               style={{
                 marginTop: "0.5rem",
                 padding: "0.75rem 1rem",
-                border: "1px solid rgba(140,180,255,0.15)",
+                border: "1px solid var(--app-card-border)",
                 borderRadius: "4px",
-                background: "rgba(10,15,35,0.8)",
+                background: "var(--app-card-bg)",
                 fontSize: "0.82rem",
-                color: "#9aaccc",
+                color: "var(--app-body)",
               }}
             >
               {simbadHint && (
                 <p style={{ margin: "0 0 0.35rem" }}>
-                  <strong style={{ color: "#dce8ff" }}>SIMBAD:</strong> {simbadHint.canonicalName} — {simbadHint.objectType}
+                  <strong style={{ color: "var(--app-heading)" }}>SIMBAD:</strong> {simbadHint.canonicalName} — {simbadHint.objectType}
                 </p>
               )}
               {nasaHint && "applicable" in nasaHint && nasaHint.applicable && (
                 <p style={{ margin: simbadHint ? "0 0 0.35rem" : 0 }}>
-                  <strong style={{ color: "#dce8ff" }}>NASA:</strong>{" "}
+                  <strong style={{ color: "var(--app-heading)" }}>NASA:</strong>{" "}
                   {[nasaHint.designation, nasaHint.name].filter(Boolean).join(" · ")}
                   {nasaHint.orbitClass ? ` — ${nasaHint.orbitClass}` : ""}
                 </p>
@@ -221,10 +221,10 @@ export function ObservationForm({
                         padding: "0.35rem 0.75rem",
                         fontSize: "0.75rem",
                         letterSpacing: "0.06em",
-                        background: "rgba(74,122,204,0.25)",
-                        border: "1px solid rgba(74,122,204,0.4)",
+                        background: "var(--app-badge-border)",
+                        border: "1px solid var(--app-btn-outline-border)",
                         borderRadius: "2px",
-                        color: "#8ab4ff",
+                        color: "var(--app-section-title)",
                         cursor: "pointer",
                       }}
                     >
@@ -239,10 +239,10 @@ export function ObservationForm({
                         padding: "0.35rem 0.75rem",
                         fontSize: "0.75rem",
                         letterSpacing: "0.06em",
-                        background: "rgba(74,122,204,0.25)",
-                        border: "1px solid rgba(74,122,204,0.4)",
+                        background: "var(--app-badge-border)",
+                        border: "1px solid var(--app-btn-outline-border)",
                         borderRadius: "2px",
-                        color: "#8ab4ff",
+                        color: "var(--app-section-title)",
                         cursor: "pointer",
                       }}
                     >
@@ -262,9 +262,9 @@ export function ObservationForm({
 
         <div className="flex flex-col gap-1">
           <label style={labelStyle}>DATE</label>
-          <input type="date" {...register("observed_at")} style={{ ...inputStyle, color: "#dce8ff" }} />
+          <input type="date" {...register("observed_at")} style={inputStyle} />
           {errors.observed_at && (
-            <p style={{ fontSize: "0.78rem", color: "#f87171", margin: 0 }}>{errors.observed_at.message}</p>
+            <p style={{ fontSize: "0.78rem", color: "var(--destructive)", margin: 0 }}>{errors.observed_at.message}</p>
           )}
         </div>
 
@@ -296,18 +296,18 @@ export function ObservationForm({
                 href={existingSketchUrl}
                 target="_blank"
                 rel="noreferrer"
-                style={{ color: "#4a7acc" }}
+                style={{ color: "var(--app-link)" }}
               >
                 Current sketch
               </a>
-              <span style={{ color: "#6a88bb", marginLeft: "0.5rem" }}>— upload a file below to replace</span>
+              <span style={{ color: "var(--app-label)", marginLeft: "0.5rem" }}>— upload a file below to replace</span>
             </p>
           )}
-          <input ref={fileRef} type="file" accept="image/*" style={{ fontSize: "0.85rem", color: "#9aaccc" }} />
+          <input ref={fileRef} type="file" accept="image/*" style={{ fontSize: "0.85rem", color: "var(--app-body)" }} />
         </div>
       </div>
 
-      {formError && <p style={{ fontSize: "0.85rem", color: "#f87171", margin: 0 }}>{formError}</p>}
+      {formError && <p style={{ fontSize: "0.85rem", color: "var(--destructive)", margin: 0 }}>{formError}</p>}
 
       <button
         type="submit"
@@ -317,10 +317,11 @@ export function ObservationForm({
           alignItems: "center",
           justifyContent: "center",
           padding: "0.6rem 1.4rem",
-          background: submitting ? "rgba(42,76,173,0.5)" : "linear-gradient(135deg, #2a4cad 0%, #1a2e6e 100%)",
-          border: "1px solid rgba(140,180,255,0.3)",
+          background: "var(--app-btn-primary)",
+          border: "1px solid var(--app-btn-primary-border)",
           borderRadius: "2px",
-          color: "#dce8ff",
+          color: "var(--app-btn-primary-text)",
+          opacity: submitting ? 0.6 : 1,
           fontSize: "0.88rem",
           letterSpacing: "0.06em",
           cursor: submitting ? "not-allowed" : "pointer",

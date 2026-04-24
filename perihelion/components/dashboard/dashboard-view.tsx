@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import {
   Bar,
   BarChart,
@@ -14,19 +15,19 @@ import {
 } from "recharts";
 import type { MonthlyCount, TypeCount } from "@/lib/observations/queries";
 
-const HEATMAP_COLORS = ["bg-white/5", "bg-indigo-900/60", "bg-indigo-600/70", "bg-indigo-400", "bg-indigo-200"];
+const HEATMAP_COLORS = ["heatmap-0", "heatmap-1", "heatmap-2", "heatmap-3", "heatmap-4"];
 
 function DashCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div
       style={{
-        border: "1px solid rgba(140,180,255,0.12)",
+        border: "1px solid var(--app-card-border)",
         borderRadius: "4px",
         padding: "1.25rem",
-        background: "rgba(10,15,35,0.6)",
+        background: "var(--app-card-bg)",
       }}
     >
-      <p style={{ margin: "0 0 0.5rem", fontSize: "0.72rem", letterSpacing: "0.16em", color: "#6a88bb" }}>
+      <p style={{ margin: "0 0 0.5rem", fontSize: "0.72rem", letterSpacing: "0.16em", color: "var(--app-label)" }}>
         {title.toUpperCase()}
       </p>
       {children}
@@ -49,10 +50,14 @@ export function DashboardView({
   heatmapWeeks,
   totalObservations,
 }: Props) {
+	
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  
   const pieSlices: { name: string; count: number; fill: string }[] =
     typeCounts.length > 0
       ? typeCounts
-      : [{ name: "No data", count: 1, fill: "rgba(255,255,255,0.08)" }];
+      : [{ name: "No data", count: 1, fill: "rgba(42,76,173,0.12)" }];
 
   const peakMonthIdx = monthly.reduce(
     (best, m, i, arr) => (m.count > arr[best]!.count ? i : best),
@@ -68,7 +73,7 @@ export function DashboardView({
               fontFamily: "'EB Garamond', Georgia, serif",
               fontSize: "1.5rem",
               letterSpacing: "0.12em",
-              color: "#8ab4ff",
+              color: "var(--app-section-title)",
               textTransform: "uppercase",
               fontWeight: 400,
               margin: 0,
@@ -76,7 +81,7 @@ export function DashboardView({
           >
             Dashboard
           </h1>
-          <p style={{ margin: "0.35rem 0 0", color: "#9aaccc", fontSize: "0.9rem" }}>
+          <p style={{ margin: "0.35rem 0 0", color: "var(--app-body)", fontSize: "0.9rem" }}>
             {totalObservations} observation{totalObservations !== 1 ? "s" : ""} logged
           </p>
         </div>
@@ -87,10 +92,10 @@ export function DashboardView({
             alignItems: "center",
             gap: "0.4rem",
             padding: "0.6rem 1.4rem",
-            background: "linear-gradient(135deg, #2a4cad 0%, #1a2e6e 100%)",
-            border: "1px solid rgba(140,180,255,0.3)",
+            background: "var(--app-btn-primary)",
+            border: "1px solid var(--app-btn-primary-border)",
             borderRadius: "2px",
-            color: "#dce8ff",
+            color: "var(--app-btn-primary-text)",
             textDecoration: "none",
             fontSize: "0.88rem",
             letterSpacing: "0.06em",
@@ -104,7 +109,7 @@ export function DashboardView({
       <div className="grid gap-4" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))" }}>
         <DashCard title="Object types">
           <div style={{ width: "100%", height: 220 }}>
-            <ResponsiveContainer>
+            {mounted && <ResponsiveContainer width="100%" height="100%" minWidth={0}>
               <PieChart>
                 <Pie
                   data={pieSlices}
@@ -122,16 +127,16 @@ export function DashboardView({
                 </Pie>
                 <Tooltip
                   contentStyle={{
-                    background: "rgba(10,15,35,0.95)",
-                    border: "1px solid rgba(140,180,255,0.2)",
+                    background: "var(--app-card-bg)",
+                    border: "1px solid var(--app-card-border)",
                     borderRadius: 4,
-                    color: "#dce8ff",
+                    color: "var(--app-heading)",
                     fontSize: 12,
                   }}
                   formatter={(value, name) => [value ?? 0, name]}
                 />
               </PieChart>
-            </ResponsiveContainer>
+            </ResponsiveContainer>}
           </div>
           {typeCounts.length > 0 && (
             <div className="flex flex-col gap-2 mt-2">
@@ -146,8 +151,8 @@ export function DashboardView({
                       display: "inline-block",
                     }}
                   />
-                  <span style={{ fontSize: "0.78rem", color: "#9aaccc" }}>{item.name}</span>
-                  <span style={{ fontSize: "0.78rem", color: "#6a88bb", marginLeft: "auto" }}>{item.count}</span>
+                  <span style={{ fontSize: "0.78rem", color: "var(--app-body)" }}>{item.name}</span>
+                  <span style={{ fontSize: "0.78rem", color: "var(--app-label)", marginLeft: "auto" }}>{item.count}</span>
                 </div>
               ))}
             </div>
@@ -156,21 +161,21 @@ export function DashboardView({
 
         <DashCard title="Sessions per month">
           <div style={{ width: "100%", height: 220 }}>
-            <ResponsiveContainer>
+            {mounted && <ResponsiveContainer width="100%" height="100%" minWidth={0}>
               <BarChart data={monthly} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
                 <XAxis
                   dataKey="label"
-                  tick={{ fill: "#4a6088", fontSize: 10 }}
-                  axisLine={{ stroke: "rgba(140,180,255,0.15)" }}
+                  tick={{ fill: "var(--app-dim)", fontSize: 10 }}
+                  axisLine={{ stroke: "var(--app-card-border)" }}
                   tickLine={false}
                 />
                 <YAxis hide domain={[0, "auto"]} />
                 <Tooltip
                   contentStyle={{
-                    background: "rgba(10,15,35,0.95)",
-                    border: "1px solid rgba(140,180,255,0.2)",
+                    background: "var(--app-card-bg)",
+                    border: "1px solid var(--app-card-border)",
                     borderRadius: 4,
-                    color: "#dce8ff",
+                    color: "var(--app-heading)",
                     fontSize: 12,
                   }}
                 />
@@ -183,20 +188,20 @@ export function DashboardView({
                   ))}
                 </Bar>
               </BarChart>
-            </ResponsiveContainer>
+            </ResponsiveContainer>}
           </div>
         </DashCard>
       </div>
 
       <div
         style={{
-          border: "1px solid rgba(140,180,255,0.12)",
+          border: "1px solid var(--app-heatmap-border)",
           borderRadius: "4px",
           padding: "1.25rem",
-          background: "rgba(10,15,35,0.6)",
+          background: "var(--app-heatmap-bg)",
         }}
       >
-        <p style={{ fontSize: "0.72rem", letterSpacing: "0.16em", color: "#6a88bb", marginBottom: "0.75rem" }}>
+        <p style={{ fontSize: "0.72rem", letterSpacing: "0.16em", color: "var(--app-label)", marginBottom: "0.75rem" }}>
           OBSERVATION HEATMAP
         </p>
         <div className="flex gap-1 overflow-x-auto pb-1">
@@ -215,7 +220,6 @@ export function DashboardView({
                       width: "10px",
                       height: "10px",
                       borderRadius: "1px",
-                      border: "1px solid rgba(255,255,255,0.04)",
                     }}
                   />
                 );
@@ -224,11 +228,11 @@ export function DashboardView({
           ))}
         </div>
         <div className="flex items-center gap-2" style={{ marginTop: "0.5rem" }}>
-          <span style={{ fontSize: "0.65rem", color: "#4a6088" }}>Less</span>
+          <span style={{ fontSize: "0.65rem", color: "var(--app-dim)" }}>Less</span>
           {HEATMAP_COLORS.map((c, i) => (
             <div key={i} className={c} style={{ width: 9, height: 9, borderRadius: "1px" }} />
           ))}
-          <span style={{ fontSize: "0.65rem", color: "#4a6088" }}>More</span>
+          <span style={{ fontSize: "0.65rem", color: "var(--app-dim)" }}>More</span>
         </div>
       </div>
     </div>

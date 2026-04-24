@@ -7,7 +7,7 @@ export default function NewObservationPage() {
       <div>
         <Link
           href="/protected/log"
-          style={{ fontSize: "0.78rem", color: "#4a7acc", textDecoration: "none", letterSpacing: "0.06em" }}
+          style={{ fontSize: "0.78rem", color: "var(--app-link)", textDecoration: "none", letterSpacing: "0.06em" }}
         >
           ← All entries
         </Link>
@@ -16,7 +16,7 @@ export default function NewObservationPage() {
             fontFamily: "'EB Garamond', Georgia, serif",
             fontSize: "1.35rem",
             letterSpacing: "0.12em",
-            color: "#8ab4ff",
+            color: "var(--app-section-title)",
             textTransform: "uppercase",
             fontWeight: 400,
             margin: "0.75rem 0 0",
@@ -24,17 +24,17 @@ export default function NewObservationPage() {
         >
           Log an observation
         </h1>
-        <p style={{ margin: "0.5rem 0 0", color: "#9aaccc", fontSize: "0.92rem" }}>
+        <p style={{ margin: "0.5rem 0 0", color: "var(--app-body)", fontSize: "0.92rem" }}>
           Target lookups use SIMBAD and NASA JPL Small-Body data when available.
         </p>
       </div>
 
       <div
         style={{
-          border: "1px solid rgba(140,180,255,0.15)",
+          border: "1px solid var(--app-card-border)",
           borderRadius: "4px",
           padding: "1.75rem",
-          background: "rgba(10,15,35,0.6)",
+          background: "var(--app-card-bg)",
           backdropFilter: "blur(8px)",
         }}
       >

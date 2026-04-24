@@ -27,7 +27,7 @@ export default async function EditObservationPage({ params }: Props) {
 
   if (error) {
     return (
-      <p style={{ color: "#f87171" }}>
+      <p style={{ color: "var(--destructive)" }}>
         Could not load observation. Run the Supabase migration if the table is missing.
       </p>
     );
@@ -49,7 +49,7 @@ export default async function EditObservationPage({ params }: Props) {
       <div>
         <Link
           href="/protected/log"
-          style={{ fontSize: "0.78rem", color: "#4a7acc", textDecoration: "none", letterSpacing: "0.06em" }}
+          style={{ fontSize: "0.78rem", color: "var(--app-link)", textDecoration: "none", letterSpacing: "0.06em" }}
         >
           ← All entries
         </Link>
@@ -58,7 +58,7 @@ export default async function EditObservationPage({ params }: Props) {
             fontFamily: "'EB Garamond', Georgia, serif",
             fontSize: "1.35rem",
             letterSpacing: "0.12em",
-            color: "#8ab4ff",
+            color: "var(--app-section-title)",
             textTransform: "uppercase",
             fontWeight: 400,
             margin: "0.75rem 0 0",
@@ -66,17 +66,17 @@ export default async function EditObservationPage({ params }: Props) {
         >
           Edit observation
         </h1>
-        <p style={{ margin: "0.5rem 0 0", color: "#9aaccc", fontSize: "0.92rem" }}>
+        <p style={{ margin: "0.5rem 0 0", color: "var(--app-body)", fontSize: "0.92rem" }}>
           Update fields below. Target lookups still use SIMBAD and NASA when you change the target name.
         </p>
       </div>
 
       <div
         style={{
-          border: "1px solid rgba(140,180,255,0.15)",
+          border: "1px solid var(--app-card-border)",
           borderRadius: "4px",
           padding: "1.75rem",
-          background: "rgba(10,15,35,0.6)",
+          background: "var(--app-card-bg)",
           backdropFilter: "blur(8px)",
         }}
       >

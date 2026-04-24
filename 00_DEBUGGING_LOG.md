@@ -55,4 +55,18 @@ Note 2: I used online tools for converting local time to ISO 8601 time code. I l
 - **Root Cause:** The SIMBAD database does not contain solar system objects, while the original NASA API only works for a finite range of named asteroids and comets.
 - **Fix Applied:** Added more UI indicators to whether the API successfully fetched an object or not, added an additional NASA API + hard-coded lookup tables as fallback options.
 
+### 2026-04-23T23:01:55Z — Bug: Broken SIMBAD/NASA API
+
+- **Status:** `Active`
+- **Symptom:** Upon loading the dashboard, 4 browser warnings appear in the console.
+- **Context:** `dashboard-view.tsx`, triggered on every load, including page reload, redirect, or refresh.
+- **Suspected Cause:** Uncertain at the time of discovery.
+- **Investigation Steps:**
+  1. Checked relevant React and UI documentations.
+  2. Consulted Claude Code, which suggested the issue might be with undefined chart sizes, fix was not effective.
+  3. Consulted Claude Code again, which suggested the issue might be with NextJS SSR loading, fix was not effective.
+  4. Double checked the documentation and console logs, the 4 warnings were likely generated 2 per chart, hinting React Strict Mode behavior.
+- **Root Cause:** Unknown.
+- **Fix Applied:** None.
+
 ---

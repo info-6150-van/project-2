@@ -41,7 +41,7 @@ export function ObservationDeleteButton({ observationId }: Props) {
           background: pending ? "rgba(127,29,29,0.35)" : "rgba(185,28,28,0.2)",
           border: "1px solid rgba(248,113,113,0.35)",
           borderRadius: "2px",
-          color: "#fca5a5",
+          color: "var(--destructive)",
           cursor: pending ? "not-allowed" : "pointer",
           whiteSpace: "nowrap",
         }}
@@ -49,7 +49,7 @@ export function ObservationDeleteButton({ observationId }: Props) {
         {pending ? "Deleting…" : "Delete"}
       </button>
       {error && (
-        <span style={{ fontSize: "0.72rem", color: "#f87171", maxWidth: "12rem", textAlign: "right" }}>
+        <span style={{ fontSize: "0.72rem", color: "var(--destructive)", maxWidth: "12rem", textAlign: "right" }}>
           {error}
         </span>
       )}

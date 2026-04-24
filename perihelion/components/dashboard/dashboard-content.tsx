@@ -15,13 +15,13 @@ export function DashboardContent() {
 
   if (isLoading) {
     return (
-      <p style={{ color: "#6a88bb", fontSize: "0.9rem" }}>Loading observations…</p>
+      <p style={{ color: "var(--app-label)", fontSize: "0.9rem" }}>Loading observations…</p>
     );
   }
 
   if (error) {
     return (
-      <p style={{ color: "#f87171", fontSize: "0.9rem" }}>
+      <p style={{ color: "var(--destructive)", fontSize: "0.9rem" }}>
         Could not load observations. Apply the database migration in Supabase if you have not yet.
       </p>
     );

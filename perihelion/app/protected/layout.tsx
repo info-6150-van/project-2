@@ -29,7 +29,7 @@ export default async function ProtectedLayout({
   return (
     <main className="min-h-screen flex flex-col items-center">
       <div className="flex-1 w-full flex flex-col gap-20 items-center">
-        <nav className="w-full flex justify-center border-b border-white/10 h-16 backdrop-blur-sm bg-black/20">
+        <nav className="app-nav w-full flex justify-center border-b h-16 backdrop-blur-sm">
           <div className="w-full max-w-5xl flex justify-between items-center p-3 px-5 text-sm">
             <div className="flex gap-6 items-center flex-wrap">
               <Link
@@ -38,7 +38,7 @@ export default async function ProtectedLayout({
                   fontFamily: "'EB Garamond', Georgia, serif",
                   letterSpacing: "0.25em",
                   fontSize: "1.05rem",
-                  color: "#c8d8f8",
+                  color: "var(--app-logo)",
                   textDecoration: "none",
                   fontWeight: 500,
                 }}
@@ -49,26 +49,26 @@ export default async function ProtectedLayout({
                 <>
                   <Link
                     href="/protected/dashboard"
-                    style={{ color: "#8ab4ff", textDecoration: "none", fontSize: "0.82rem", letterSpacing: "0.06em" }}
+                    style={{ color: "var(--app-link)", textDecoration: "none", fontSize: "0.82rem", letterSpacing: "0.06em" }}
                   >
                     Dashboard
                   </Link>
                   <Link
                     href="/protected/log/new"
-                    style={{ color: "#9aaccc", textDecoration: "none", fontSize: "0.82rem", letterSpacing: "0.06em" }}
+                    style={{ color: "var(--app-body)", textDecoration: "none", fontSize: "0.82rem", letterSpacing: "0.06em" }}
                   >
                     New observation
                   </Link>
                   <Link
                     href="/protected/log"
-                    style={{ color: "#9aaccc", textDecoration: "none", fontSize: "0.82rem", letterSpacing: "0.06em" }}
+                    style={{ color: "var(--app-body)", textDecoration: "none", fontSize: "0.82rem", letterSpacing: "0.06em" }}
                   >
                     Log
                   </Link>
                   {isAdmin && (
                     <Link
                       href="/admin"
-                      style={{ color: "#8ab4ff", textDecoration: "none", fontSize: "0.82rem", letterSpacing: "0.06em" }}
+                      style={{ color: "var(--app-link)", textDecoration: "none", fontSize: "0.82rem", letterSpacing: "0.06em" }}
                     >
                       Admin
                     </Link>
@@ -89,8 +89,7 @@ export default async function ProtectedLayout({
         <div className="flex-1 flex flex-col gap-20 max-w-5xl p-5 w-full">{children}</div>
 
         <footer
-          className="w-full flex items-center justify-center border-t mx-auto text-center text-xs gap-8 py-16"
-          style={{ borderColor: "rgba(140,180,255,0.1)", color: "#4a6088" }}
+          className="app-footer w-full flex items-center justify-center border-t mx-auto text-center text-xs gap-8 py-16"
         >
           <p>
             Powered by{" "}

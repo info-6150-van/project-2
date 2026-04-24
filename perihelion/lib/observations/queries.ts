@@ -6,7 +6,7 @@ export type TypeCount = { name: string; count: number; fill: string };
 
 export type DayCount = { day: string; value: number };
 
-const TYPE_COLORS = ["#2a4cad", "#4a7acc", "#8ab4ff", "rgba(255,255,255,0.15)"];
+const TYPE_COLORS = ["#2a4cad", "#4a7acc", "#8ab4ff", "rgba(42,76,173,0.15)"];
 
 function monthLabel(d: Date): string {
   return ["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"][d.getMonth()] ?? "?";
